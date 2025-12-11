@@ -1,0 +1,65 @@
+Contributors
+Your Name:
+### .gitignore
+Python
+pycache/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+venv/
+
+Virtualenv
+ENV/
+env.bak/
+
+Environment variables
+.env
+*.env
+
+Database
+*.db
+*.sqlite
+*.sqlite3
+
+PyCharm / VSCode
+.idea/
+.vscode/
+
+OS files
+.DS_Store
+Thumbs.db
+
+Logs
+*.log
+### Minimal requirements.txt (if you don't have pip freeze)
+fastapi
+uvicorn
+jinja2
+sqlalchemy
+python-multipart
+pyjwt
+passlib
+PyPDF2
+python-docx
+python-pptx
+openai
+
+(Adjust versions if you used specific ones.)
+
+# Quick checklist you can follow right now (do in this order)
+
+1. Decide: use **GitHub web** or **local git** (web is fastest).
+2. Create `README.md` and `.gitignore` using provided content.
+3. Put your PDF in `docs/` (upload).
+4. Add `requirements.txt` (either `pip freeze > requirements.txt` locally or create file manually with the list above).
+5. Commit & push.
+6. Confirm on GitHub that all files show in repo root and `docs/`.
+
+If you want, I’ll produce the **exact commit messages** and the **README final text** tailored to your repo name and where `main.py` actually lives — tell me whether `main.py` is in `src/` or repo root. But if you want zero fuss, use the web UI method and paste the README I gave.
+
+---
+
+Tell me: do you want **the exact README content tweaked** to match your local file layout (e.g., `main.py` at root vs `src/main.py`)? If yes, I’ll produce that short final version you can paste immediately.
+::contentReference[oaicite:0]{index=0}

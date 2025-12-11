@@ -1,0 +1,13 @@
+RetainIQ – AI-Integrated Learning System
+Hackathon Submission – Team Kusumitha (Solo)
+
+✔ Backend (FastAPI) implemented
+✔ AI-driven quiz generation working
+✔ Flashcard system functional
+✔ Document ingestion (PDF / DOCX / PPTX)
+✔ User dashboard
+✔ Authentication system (signup/login)
+✔ Working prototype ready
+
+See README.md for full setup + architecture.
+See docs folder for system design & summary PDF.

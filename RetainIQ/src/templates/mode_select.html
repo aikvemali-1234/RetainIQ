@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>What do you want to do?</h2>
+<div class="card center-buttons">
+    <p>Document: <strong>{{ doc.filename }}</strong></p>
+    <a class="button" href="/quiz/settings/{{ doc.id }}">Generate Quiz</a>
+    <a class="button secondary" href="/flashcards/{{ doc.id }}">Generate Flashcards</a>
+</div>
+{% endblock %}
+

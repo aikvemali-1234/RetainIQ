@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Quiz Results</h1>
+
+<div class="card">
+    <p><strong>Score:</strong> {{ score }} / {{ total_questions * 10 }}</p>
+    <p><strong>Correct:</strong> {{ answers | selectattr("correct") | list | length }}</p>
+    <p><strong>Wrong:</strong> {{ total_questions - (answers | selectattr("correct") | list | length) }}</p>
+
+    <div style="margin-top: 1rem;">
+        <a href="/dashboard" class="primary-button" style="padding: 0.5rem 1rem; border-radius: 999px; background-color: #4f46e5; color: white; text-decoration: none;">
+            Done
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Question Review</h3>
+    <ol>
+        {% for ans in answers %}
+        <li>
+            <!-- clean out box-like characters from question text -->
+            <p>{{ ans.question.question
+                 |replace('□',' ')
+                 |replace('■',' ')
+                 |replace('▪',' ')
+            }}</p>
+            <ul>
+                {% for opt in ans.question.options %}
+                <li
+                    {% if loop.index0 == ans.question.correct_index %}
+                        style="font-weight:bold;"
+                    {% endif %}
+                >
+                    <!-- clean out box-like characters from option text -->
+                    {{ opt
+                       |replace('□',' ')
+                       |replace('■',' ')
+                       |replace('▪',' ')
+                    }}
+                    {% if loop.index0 == ans.selected %}
+                        (your answer{% if not ans.correct %}, wrong{% endif %})
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Flashcard Session Summary</h2>
+
+<div class="card">
+    <p><strong>Document:</strong> {{ doc.filename }}</p>
+    <p><strong>Total cards:</strong> {{ total }}</p>
+    <p><strong>Marked "I know this":</strong> {{ known }}</p>
+    <p><strong>Marked "Need to revise":</strong> {{ review }}</p>
+    <p><strong>Not answered / not seen:</strong> {{ unanswered }}</p>
+</div>
+
+<div class="card">
+    <h3>Cards & Correct Answers</h3>
+    <p>Use this list to quickly revise all answers, especially the ones you weren’t sure about.</p>
+
+    <ol>
+        {% for c in cards %}
+        <li style="margin-bottom: 1rem;">
+            <p><strong>Q:</strong> {{ c.front }}</p>
+            <p><strong>A:</strong> {{ c.back }}</p>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+
+<div style="margin-top: 1.5rem;">
+    <a href="/dashboard" class="primary-button">Back to Dashboard</a>
+</div>
+
+<style>
+    .card {
+        background: #ffffff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin-bottom: 1.5rem;
+    }
+    .primary-button {
+        background-color: #4f46e5;
+        color: white;
+        padding: 0.6rem 1.4rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+
+{% endblock %}

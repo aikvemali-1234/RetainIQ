@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width:1100px;margin:40px auto;">
+  <h1 style="font-size:32px;margin-bottom:1rem;">Document</h1>
+
+  <div class="card" style="padding:1.5rem;margin-bottom:1.25rem;">
+    <h2 style="margin:0 0 .5rem 0;">{{ doc.filename }}</h2>
+    <p style="margin:0;color:#444;">
+      Uploaded: {{ (doc.created_at.strftime('%d %b %Y') if doc.created_at is defined else 'Unknown') }}
+    </p>
+    <p style="margin-top:1rem; white-space:pre-wrap; color:#222;">{{ doc.content[:2000] }}{% if doc.content|length > 2000 %}...{% endif %}</p>
+  </div>
+
+  <div style="display:flex;gap:1.25rem;flex-wrap:wrap;">
+    <div style="flex:1; min-width:300px;">
+      <h3>Quiz Attempts</h3>
+      {% if attempts %}
+        <ul>
+          {% for a in attempts %}
+            <li>
+              {{ a.created_at.strftime('%d %b %Y') if a.created_at is defined else 'Date?' }} —
+              Score: {{ a.score }} / {{ a.total_questions }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No quiz attempts yet.</p>
+      {% endif %}
+    </div>
+
+    <div style="flex:1; min-width:300px;">
+      <h3>Flashcard Progress</h3>
+      {% if flashcards %}
+        <ul>
+          {% for f in flashcards %}
+            <li>{{ f.front[:80] }} — known: {{ f.known_count or 0 }} | review: {{ f.review_count or 0 }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No flashcard progress yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <p><strong>Total questions:</strong> {{ total_questions }}</p>
+    <p><strong>Total score:</strong> {{ total_score }}</p>
+    <p><strong>Accuracy:</strong> {{ accuracy }}%</p>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <a href="/mode/{{ doc.id }}" class="primary-button">Back to modes</a>
+    <a href="/quiz/settings/{{ doc.id }}" class="primary-button">Run quiz</a>
+  </div>
+</div>
+{% endblock %}

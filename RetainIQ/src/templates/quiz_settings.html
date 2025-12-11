@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Quiz Settings</h2>
+<div class="card">
+    <p>Document: <strong>{{ doc.filename }}</strong></p>
+    <form method="post" action="/quiz/start/{{ doc.id }}">
+        <label>Difficulty Level</label>
+        <select name="difficulty" required>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="custom_doc">Custom according to the document</option>
+        </select>
+
+        <label>Number of Questions</label>
+        <select name="question_count_mode" required>
+            <option value="10-15">10 - 15</option>
+            <option value="15-20">15 - 20</option>
+            <option value="custom_full">Customize according to syllabus & important topics</option>
+        </select>
+
+        <p class="hint">
+            If you choose "Custom according to the document" (difficulty),
+            the system will automatically decide question count and balance Easy / Medium / Hard.
+        </p>
+
+        <button type="submit">Start Quiz</button>
+    </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<h2>Upload Study Material</h2>
+<div class="card">
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="upload-box">
+            <p>Drag & drop or click to upload</p>
+            <input type="file" name="file" required>
+        </div>
+        <p class="hint">Supported formats: PDF, DOCX, PPT</p>
+        <button type="submit">Upload & Process</button>
+    </form>
+</div>
+{% endblock %}
+

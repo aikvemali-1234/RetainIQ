@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Flashcards session results</h1>
+
+<div class="card">
+  <p><strong>Document:</strong> {{ doc.filename if doc else "Unknown" }}</p>
+  <p><strong>Total cards tracked:</strong> {{ total_cards }}</p>
+  <p><strong>Known total (times marked known):</strong> {{ known_total }}</p>
+  <p><strong>Need review total (times marked review):</strong> {{ review_total }}</p>
+</div>
+
+<div class="card" style="margin-top:1rem;">
+  <h3>Card breakdown</h3>
+  <ul>
+    {% for r in rows %}
+      <li>
+        <strong>{{ r.front[:120] }}</strong>
+        <div>Known: {{ r.known_count or 0 }} — Review: {{ r.review_count or 0 }}</div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div style="margin-top:1rem;">
+  <a href="/dashboard" class="primary-button">Back to Dashboard</a>
+  <a href="/flashcards/{{ doc.id }}" class="primary-button">Re-open Flashcards</a>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="max-width:1000px;margin:2.5rem auto;">
+  <h1 style="font-size:2.1rem;margin-bottom:1.2rem;">Quiz</h1>
+
+  <div style="
+    background:#fff;
+    padding:2rem;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(20,20,40,0.06);
+  ">
+    {# display human-friendly index (index is 0-based in backend) #}
+    <h2 style="font-size:1.2rem;margin-bottom:1rem;">
+      Question {{ index + 1 }} of {{ total }}
+    </h2>
+
+    {# question text - question is a python dict so use bracket access #}
+    <div style="font-size:1.05rem; margin-bottom:1.25rem; line-height:1.5; white-space:pre-wrap; word-wrap:break-word;">
+      {{ question['question'] }}
+    </div>
+
+    <form method="post" action="/quiz/answer">
+      {# iterate options, send index (0..3) as integer to backend #}
+      <div style="display:flex; flex-direction:column; gap:0.8rem; margin-bottom:1.2rem;">
+        {% for opt in question['options'] %}
+        <label style="
+          display:flex;
+          align-items:flex-start;
+          gap:0.8rem;
+          padding:.7rem 1rem;
+          border-radius:8px;
+          background:#f6f7fb;
+          cursor:pointer;
+          line-height:1.4;
+          ">
+          <input type="radio" name="selected_option" value="{{ loop.index0 }}" required
+                 style="margin-top:0.2rem;" />
+          <span style="white-space:pre-wrap; word-wrap:break-word;">{{ opt }}</span>
+        </label>
+        {% endfor %}
+      </div>
+
+      <div style="display:flex; align-items:center; gap:0.9rem; flex-wrap:wrap;">
+        <button type="submit" style="
+            background:#5b46e6;
+            color:white;
+            padding:.7rem 1.2rem;
+            border-radius:10px;
+            border:none;
+            cursor:pointer;
+            font-size:1rem;
+        ">Submit Answer</button>
+
+        {# Skip — we don't have a backend skip handler; emulate skip by submitting a special index (-1).
+           We'll create a small form that posts selected_option=-1 so quiz_answer increments index without scoring. #}
+        <form method="post" action="/quiz/answer" style="display:inline-block; margin:0;">
+          <input type="hidden" name="selected_option" value="-1">
+          <button type="submit" style="
+               background:#6b7280;
+               color:white;
+               padding:.62rem 1rem;
+               border-radius:10px;
+               border:none;
+               cursor:pointer;
+               font-size:0.95rem;
+          ">Skip</button>
+        </form>
+
+        <a href="/quiz/play" style="color:#374151; font-size:0.95rem; margin-left:0.5rem;">Refresh</a>
+      </div>
+    </form>
+
+    {# optionally show explanation if you want later. currently backend doesn't return it on play view #}
+  </div>
+</div>
+
+{% endblock %}
